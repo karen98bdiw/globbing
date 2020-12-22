@@ -128,8 +128,9 @@ class IntroducingScreen extends StatelessWidget {
               onTap: () => _showChangeLanguageDiolog(context, languageState),
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    topRight: Radius.circular(10)),
+                  bottomRight: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   color: Colors.black45,

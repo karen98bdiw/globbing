@@ -29,11 +29,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   _usualRegisterForm(),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   _myDivider(),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   Row(
                     children: [
@@ -49,23 +49,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("By continuing you agree"),
-                      GestureDetector(
-                        child: Text(
-                          "Agreement",
-                          style: TextStyle(color: Colors.orange[600]),
-                        ),
-                      )
-                    ],
+                    height: 15,
                   ),
                 ],
               ),
-            )
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("By continuing you agree"),
+                GestureDetector(
+                  child: Text(
+                    "Agreement",
+                    style: TextStyle(color: Colors.orange[600]),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
@@ -137,6 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         children: [
           TextField(
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 5),
               hintText: "Email",
               hintStyle: TextStyle(color: Colors.grey),
               border: OutlineInputBorder(
@@ -148,11 +149,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 15,
           ),
           TextField(
             obscureText: _hidePasswordText,
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 5),
               suffixIcon: IconButton(
                 icon: Icon(Icons.warning),
                 onPressed: () {
@@ -172,34 +174,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 15,
           ),
           Row(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                flex: 2,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.25,
                 child: TextField(
-                  readOnly: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.ac_unit),
-                    hintText: "123",
-                    suffixIcon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1),
-                    ),
-                  ),
+                      contentPadding: EdgeInsets.all(0),
+                      hintText: "123",
+                      hintStyle: TextStyle(color: Colors.black),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: CircleAvatar(
+                          radius: 8,
+                        ), // myIcon is a 48px-wide widget.
+                      ),
+                      prefixIconConstraints: BoxConstraints(minWidth: 8),
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 5, left: 5),
+                        child: Icon(Icons
+                            .keyboard_arrow_down), // myIcon is a 48px-wide widget.
+                      ),
+                      suffixIconConstraints: BoxConstraints(minWidth: 10),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
+                      )),
                 ),
               ),
               SizedBox(
                 width: 10,
               ),
               Expanded(
-                flex: 2,
                 child: TextField(
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 5),
                     hintText: "Phone",
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 1),
@@ -261,7 +272,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "Facebook",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         borderSide: BorderSide(
           color: Colors.grey[500],
@@ -275,10 +286,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "Google",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         borderSide: BorderSide(
           color: Colors.grey[500],
         ));
   }
 }
+
+//  TextField(
+//                   readOnly: true,
+//                   decoration: InputDecoration(
+//                     contentPadding: EdgeInsets.only(left: 5),
+//                     prefixIcon: Icon(Icons.ac_unit),
+//                     hintText: "123",
+//                     hintStyle: TextStyle(
+//                       color: Colors.black,
+//                     ),
+//                     suffixIcon: Icon(
+//                       Icons.keyboard_arrow_down,
+//                       color: Colors.grey,
+//                     ),
+//                     border: OutlineInputBorder(
+//                       borderSide: BorderSide(color: Colors.grey, width: 1),
+//                     ),
+//                   ),
+//                 ),

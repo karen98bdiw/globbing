@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../mainScreens/mainScreensRoot.dart';
 
 class LogInScreen extends StatefulWidget {
   static final routeName = "LogInScreen";
@@ -9,6 +10,10 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   bool hidePasswordText = true;
+
+  void _logIn(ctx) {
+    Navigator.of(ctx).pushNamed(MainScreensRoot.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +163,9 @@ class _LogInScreenState extends State<LogInScreen> {
             height: 10,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              _logIn(context);
+            },
             child: Text(
               "Login",
               style: TextStyle(fontSize: 20),

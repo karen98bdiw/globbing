@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/logScreens/introducingScreen.dart';
 import './screens/logScreens/logInScreen.dart';
-import 'screens/logScreens/registerScreens/registerScreen.dart';
+import './screens/logScreens/registerScreens/registerScreen.dart';
+import './screens/mainScreens/mainScreensRoot.dart';
 import './utils/languageState.dart';
 
 main() => runApp(GlobbingApp());
@@ -22,6 +23,7 @@ class GlobbingApp extends StatelessWidget {
           IntroducingScreen.routeName: (ctx) => IntroducingScreen(),
           LogInScreen.routeName: (ctx) => LogInScreen(),
           RegisterScreen.routeName: (ctx) => RegisterScreen(),
+          MainScreensRoot.routeName: (ctx) => MainScreensRoot(),
         },
       ),
     );

@@ -18,95 +18,205 @@ class _MainScreensRootState extends State<MainScreensRoot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ClipPath(
-              clipper: MyClipper(),
-              child: _topContent(context, _expandTopContext, _isExpand)),
-        ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                color: Color.fromRGBO(81, 84, 89, 1),
+                padding: EdgeInsets.only(
+                  top: 30,
+                  left: 20,
+                  right: 20,
+                ),
+                child: _topContent(context, _expandTopContext, _isExpand),
+              ),
+              Stack(
+                overflow: Overflow.visible,
+                children: [
+                  ClipPath(
+                    clipper: MyClipper(),
+                    child: Container(
+                      //this container will draw the clipped shape
+                      padding: EdgeInsets.only(bottom: _isExpand ? 70 : 150),
+                      color: Color.fromRGBO(81, 84, 89, 1),
+                    ),
+                  ),
+                  Container(
+                    margin: _isExpand
+                        ? EdgeInsets.only(top: 40)
+                        : EdgeInsets.only(top: 20),
+                    child: _mainContent(),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              _bottomContent(),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   Widget _topContent(ctx, _expandCallback, _isExpanded) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SafeArea(child: _appBar()),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _balanceCounter(),
+            _bonusCounter(),
+            GestureDetector(
+              onTap: () {
+                _expandCallback();
+              },
+              child: Icon(
+                _isExpanded
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
+        _isExpanded ? _myDivider() : Container(),
+        _isExpanded ? _fillActionsView() : Container(),
+      ],
+    );
+  }
+
+  Widget _mainContent() {
     return Container(
-      color: Color.fromRGBO(81, 84, 89, 1),
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 30,
-        right: 20,
-        left: 20,
-        bottom:
-            80, //80 for covering data + clipper points that is smaller than height
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _appBar(),
+          Card(
+            elevation: 10,
+            child: ListTile(
+              contentPadding: EdgeInsets.all(20),
+              leading: Icon(
+                Icons.shop,
+                size: 60,
+              ),
+              title: Text("My Orders"),
+              subtitle: Text("No orders yet"),
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _balanceCounter(),
-              _bonusCounter(),
-              GestureDetector(
-                onTap: () {
-                  _expandCallback();
-                },
-                child: Icon(
-                  _isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-          _isExpanded ? _myDivider() : Container(),
-          _isExpanded ? _fillActionsView() : Container(),
+          Card(
+            elevation: 10,
+            child: ListTile(
+              contentPadding: EdgeInsets.all(20),
+              leading: Icon(
+                Icons.location_on,
+                size: 60,
+              ),
+              title: Text("My Adresses"),
+              subtitle: Text("Adresses in 7 countries"),
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget _appBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _bottomContent() {
+    return Container(
+      alignment: Alignment.center,
+      child: IntrinsicHeight(
+        child: Row(
+          // mainAxisSize: MainAxisSize.min,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/images/thanos.jpeg"),
-              backgroundColor: Colors.green,
-              radius: 25,
+            Expanded(
+              flex: 6,
+              child: Column(
+                children: [
+                  Icon(Icons.home),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("shops"),
+                ],
+              ),
             ),
-            SizedBox(
-              width: 15,
+            Expanded(
+              flex: 1,
+              child: VerticalDivider(
+                thickness: 2,
+                width: 0,
+              ),
             ),
-            Text(
-              "name surname",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Icon(
-              Icons.keyboard_arrow_down,
-              size: 25,
-              color: Colors.white,
+            Expanded(
+              flex: 6,
+              child: Column(
+                children: [
+                  Icon(Icons.shopping_cart),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("Buy for me"),
+                ],
+              ),
             ),
           ],
         ),
-        Icon(
-          Icons.notifications,
-          size: 25,
-          color: Colors.white,
-        ),
-      ],
+      ),
+    );
+  }
+
+  Widget _appBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(kToolbarHeight),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/images/thanos.jpeg"),
+                backgroundColor: Colors.green,
+                radius: 25,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text(
+                "name surname",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Icons.keyboard_arrow_down,
+                size: 25,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          Icon(
+            Icons.notifications,
+            size: 25,
+            color: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 
@@ -268,11 +378,11 @@ class MyClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     print("${size.height}this is path size");
     var path = Path();
-    path.lineTo(0, size.height - 40);
-    var endPoint = Offset(size.width, size.height - 40);
+    path.lineTo(0, size.height - 60);
+    var endPoint = Offset(size.width, size.height - 60);
     var controllPoint = Offset(size.width / 2, size.height);
-    path.quadraticBezierTo(
-        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy);
+    path.conicTo(
+        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy, 1);
     path.lineTo(size.width, 0);
 
     return path;

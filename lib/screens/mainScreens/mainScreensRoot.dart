@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import './components/clipper.dart';
+import './components/appBar.dart';
+import './components/counters.dart';
+
 class MainScreensRoot extends StatefulWidget {
   static final routeName = "MainScreensRoot";
   @override
@@ -60,6 +64,51 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           ),
         ),
       ),
+      bottomNavigationBar: _bottomNav(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.deepOrange,
+        child: Icon(
+          Icons.add,
+          size: 40,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Widget _bottomNav() {
+    return BottomAppBar(
+      shape: CircularNotchedRectangle(),
+      // notchMargin: 10,
+      child: Container(
+        padding: EdgeInsets.only(
+          bottom: 10,
+          left: 20,
+          right: 20,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(icon: Icon(Icons.home), onPressed: () {}),
+                Text("Main")
+              ],
+            ),
+            Text("Enter Order"),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+                Text("Menu"),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -67,15 +116,25 @@ class _MainScreensRootState extends State<MainScreensRoot> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SafeArea(child: _appBar()),
+        SafeArea(
+          child: MyAppBar(),
+        ),
         SizedBox(
           height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _balanceCounter(),
-            _bonusCounter(),
+            Counter(
+              name: "Balance",
+              value: 0,
+              type: CounterType.Balance,
+            ),
+            Counter(
+              name: "Bouns",
+              value: 0,
+              type: CounterType.Bonus,
+            ),
             GestureDetector(
               onTap: () {
                 _expandCallback();
@@ -178,124 +237,6 @@ class _MainScreensRootState extends State<MainScreensRoot> {
     );
   }
 
-  Widget _appBar() {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(kToolbarHeight),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage("assets/images/thanos.jpeg"),
-                backgroundColor: Colors.green,
-                radius: 25,
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                "name surname",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 25,
-                color: Colors.white,
-              ),
-            ],
-          ),
-          Icon(
-            Icons.notifications,
-            size: 25,
-            color: Colors.white,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _balanceCounter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Balance",
-          style: TextStyle(color: Colors.white),
-        ),
-        Row(
-          children: [
-            Icon(
-              Icons.mail_outline,
-              color: Colors.white,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "0",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  TextSpan(
-                    text: "AMD",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _bonusCounter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Bonus",
-          style: TextStyle(color: Colors.white),
-        ),
-        Row(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "0",
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                  WidgetSpan(
-                    child: SizedBox(
-                      width: 5,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " AMD",
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _fillActionsView() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
@@ -370,27 +311,5 @@ class _MainScreensRootState extends State<MainScreensRoot> {
         )
       ],
     );
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    print("${size.height}this is path size");
-    var path = Path();
-    path.lineTo(0, size.height - 60);
-    var endPoint = Offset(size.width, size.height - 60);
-    var controllPoint = Offset(size.width / 2, size.height);
-    path.conicTo(
-        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy, 1);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    return false;
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/buttons.dart';
+
+import '../../mainScreens/mainScreensRoot.dart';
 
 class RegisterScreen extends StatefulWidget {
   static final routeName = "RegisterScreen";
@@ -12,6 +15,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _back(context) {
     Navigator.of(context).pop();
+  }
+
+  void _register(context) {
+    Navigator.of(context).pushNamed(MainScreensRoot.routeName);
   }
 
   @override
@@ -38,13 +45,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: _fbRegBtn(),
+                        child: FbButton(
+                          callBack: () => _register(context),
+                        ),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       Expanded(
-                        child: _gRegBnt(),
+                        child: GoogleButton(
+                          callBack: () => _register(context),
+                        ),
                       ),
                     ],
                   ),
@@ -71,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget _appBar(context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(100),
+      preferredSize: Size.fromHeight(kToolbarHeight),
       child: Container(
         color: Color.fromRGBO(81, 84, 89, 1),
         padding: EdgeInsets.only(
@@ -261,51 +272,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ],
     );
   }
-
-  Widget _fbRegBtn() {
-    return OutlineButton(
-        onPressed: () {},
-        child: Text(
-          "Facebook",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-        ),
-        padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-        borderSide: BorderSide(
-          color: Colors.grey[500],
-        ));
-  }
-
-  Widget _gRegBnt() {
-    return OutlineButton(
-        onPressed: () {},
-        child: Text(
-          "Google",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-        ),
-        padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-        borderSide: BorderSide(
-          color: Colors.grey[500],
-        ));
-  }
 }
-
-//  TextField(
-//                   readOnly: true,
-//                   decoration: InputDecoration(
-//                     contentPadding: EdgeInsets.only(left: 5),
-//                     prefixIcon: Icon(Icons.ac_unit),
-//                     hintText: "123",
-//                     hintStyle: TextStyle(
-//                       color: Colors.black,
-//                     ),
-//                     suffixIcon: Icon(
-//                       Icons.keyboard_arrow_down,
-//                       color: Colors.grey,
-//                     ),
-//                     border: OutlineInputBorder(
-//                       borderSide: BorderSide(color: Colors.grey, width: 1),
-//                     ),
-//                   ),
-//                 ),

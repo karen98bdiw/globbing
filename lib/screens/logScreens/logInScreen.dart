@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../mainScreens/mainScreensRoot.dart';
+import './widgets/buttons.dart';
 
 class LogInScreen extends StatefulWidget {
   static final routeName = "LogInScreen";
@@ -86,12 +87,17 @@ class _LogInScreenState extends State<LogInScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Expanded(
-                        child: _fbLoginBtn(),
+                        child: FbButton(
+                          callBack: () => _logIn(context),
+                        ),
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Expanded(child: _gLogInBnt()),
+                      Expanded(
+                          child: GoogleButton(
+                        callBack: () => _logIn(context),
+                      )),
                     ],
                   )
                 ],
@@ -179,33 +185,5 @@ class _LogInScreenState extends State<LogInScreen> {
         ],
       ),
     );
-  }
-
-  Widget _fbLoginBtn() {
-    return OutlineButton(
-        onPressed: () {},
-        child: Text(
-          "Facebook",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-        ),
-        padding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-        borderSide: BorderSide(
-          color: Colors.grey[500],
-        ));
-  }
-
-  Widget _gLogInBnt() {
-    return OutlineButton(
-        onPressed: () {},
-        child: Text(
-          "Google",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-        ),
-        padding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-        borderSide: BorderSide(
-          color: Colors.grey[500],
-        ));
   }
 }

@@ -51,6 +51,8 @@ flutter:
     - assets/images/russia.png
     - assets/images/armenia.png
     - assets/images/thanos.jpeg
+    - assets/icons/fbIcon.png
+    - assets/icons/googleIcon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

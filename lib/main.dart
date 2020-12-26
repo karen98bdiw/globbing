@@ -5,6 +5,7 @@ import './screens/logScreens/logInScreen.dart';
 import './screens/logScreens/registerScreens/registerScreen.dart';
 import './screens/mainScreens/mainScreensRoot.dart';
 import './utils/languageState.dart';
+import './screens/mainScreens/menuScreen.dart';
 
 main() => runApp(GlobbingApp());
 
@@ -24,6 +25,7 @@ class GlobbingApp extends StatelessWidget {
           LogInScreen.routeName: (ctx) => LogInScreen(),
           RegisterScreen.routeName: (ctx) => RegisterScreen(),
           MainScreensRoot.routeName: (ctx) => MainScreensRoot(),
+          MenuScreen.routeName: (ctx) => MenuScreen(),
         },
       ),
     );

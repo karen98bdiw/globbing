@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import './components/clipper.dart';
 import './components/appBar.dart';
 import './components/counters.dart';
+import './components/mainScreenAction.dart';
+import './components/bottomNavigationBar.dart';
 
 class MainScreensRoot extends StatefulWidget {
   static final routeName = "MainScreensRoot";
@@ -28,15 +30,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                color: Color.fromRGBO(81, 84, 89, 1),
-                padding: EdgeInsets.only(
-                  top: 30,
-                  left: 20,
-                  right: 20,
-                ),
-                child: _topContent(context, _expandTopContext, _isExpand),
-              ),
+              _topContent(context, _expandTopContext, _isExpand),
               Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -64,93 +58,55 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           ),
         ),
       ),
-      bottomNavigationBar: _bottomNav(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.deepOrange,
-        child: Icon(
-          Icons.add,
-          size: 40,
-        ),
+      bottomNavigationBar: BottomNavigation(
+        curentIndex: 1,
       ),
+      floatingActionButton: BottomNavigation.floatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  Widget _bottomNav() {
-    return BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      // notchMargin: 10,
-      child: Container(
-        padding: EdgeInsets.only(
-          bottom: 10,
-          left: 20,
-          right: 20,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(icon: Icon(Icons.home), onPressed: () {}),
-                Text("Main")
-              ],
-            ),
-            Text("Enter Order"),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-                Text("Menu"),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _topContent(ctx, _expandCallback, _isExpanded) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SafeArea(
-          child: MyAppBar(),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Counter(
-              name: "Balance",
-              value: 0,
-              type: CounterType.Balance,
+    return Container(
+      color: Color.fromRGBO(81, 84, 89, 1),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SafeArea(
+            child: MyAppBar(),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            color: Color.fromRGBO(81, 84, 89, 1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Counter(
+                  value: 0,
+                  type: CounterType.Balance,
+                ),
+                Counter(
+                  value: 0,
+                  type: CounterType.Bonus,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _expandCallback();
+                  },
+                  child: Icon(
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: Colors.white,
+                  ),
+                )
+              ],
             ),
-            Counter(
-              name: "Bouns",
-              value: 0,
-              type: CounterType.Bonus,
-            ),
-            GestureDetector(
-              onTap: () {
-                _expandCallback();
-              },
-              child: Icon(
-                _isExpanded
-                    ? Icons.keyboard_arrow_up
-                    : Icons.keyboard_arrow_down,
-                color: Colors.white,
-              ),
-            )
-          ],
-        ),
-        _isExpanded ? _myDivider() : Container(),
-        _isExpanded ? _fillActionsView() : Container(),
-      ],
+          ),
+          _isExpanded ? _myDivider() : Container(),
+          _isExpanded ? _fillActionsView() : Container(),
+        ],
+      ),
     );
   }
 
@@ -159,33 +115,21 @@ class _MainScreensRootState extends State<MainScreensRoot> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          Card(
-            elevation: 10,
-            child: ListTile(
-              contentPadding: EdgeInsets.all(20),
-              leading: Icon(
-                Icons.shop,
-                size: 60,
-              ),
-              title: Text("My Orders"),
-              subtitle: Text("No orders yet"),
-            ),
+          MainScreenAction(
+            title: "My Orders",
+            subtitle: "No orders yet",
+            icon: Icons.card_giftcard,
+            callBack: () => print("My orders"),
           ),
           SizedBox(
             height: 20,
           ),
-          Card(
-            elevation: 10,
-            child: ListTile(
-              contentPadding: EdgeInsets.all(20),
-              leading: Icon(
-                Icons.location_on,
-                size: 60,
-              ),
-              title: Text("My Adresses"),
-              subtitle: Text("Adresses in 7 countries"),
-            ),
-          )
+          MainScreenAction(
+            title: "My Adresses",
+            subtitle: "Adresses in 7 countries",
+            icon: Icons.location_on,
+            callBack: () => print("My Adresses"),
+          ),
         ],
       ),
     );
@@ -197,39 +141,52 @@ class _MainScreensRootState extends State<MainScreensRoot> {
       child: IntrinsicHeight(
         child: Row(
           // mainAxisSize: MainAxisSize.min,
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  Icon(Icons.home),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("shops"),
-                ],
-              ),
+            Column(
+              children: [
+                Icon(
+                  Icons.home,
+                  size: 30,
+                  color: Colors.blue[200],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Shops",
+                  style: TextStyle(color: Colors.blue[200]),
+                ),
+              ],
             ),
-            Expanded(
-              flex: 1,
-              child: VerticalDivider(
-                thickness: 2,
-                width: 0,
-              ),
+            SizedBox(
+              width: 50,
             ),
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  Icon(Icons.shopping_cart),
-                  SizedBox(
-                    height: 10,
+            VerticalDivider(
+              thickness: 1,
+              width: 0,
+            ),
+            SizedBox(
+              width: 50,
+            ),
+            Column(
+              children: [
+                Icon(
+                  Icons.shopping_cart,
+                  size: 30,
+                  color: Colors.blue[200],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Buy for me",
+                  style: TextStyle(
+                    color: Colors.blue[200],
                   ),
-                  Text("Buy for me"),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

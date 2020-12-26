@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 enum CounterType { Bonus, Balance }
 
 class Counter extends StatelessWidget {
-  final String name;
   final double value;
   final CounterType type;
 
-  Counter({this.name, this.value, this.type});
+  Counter({this.value, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class Counter extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "$name",
+          "${type == CounterType.Balance ? "Balance" : "Bonus"}",
           style: TextStyle(color: Colors.white),
         ),
         Row(
@@ -33,8 +32,8 @@ class Counter extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: "$value",
-                    style: TextStyle(color: Colors.white),
+                    text: "${value.floor()}",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   WidgetSpan(
                     child: SizedBox(
@@ -43,7 +42,11 @@ class Counter extends StatelessWidget {
                   ),
                   TextSpan(
                     text: "AMD",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: type == CounterType.Balance
+                            ? Colors.white
+                            : Colors.white54,
+                        fontSize: 20),
                   ),
                 ],
               ),

@@ -242,7 +242,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 10,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(MainScreensRoot.routeName);
+            },
             child: Text(
               "Continue",
               style: TextStyle(fontSize: 20),

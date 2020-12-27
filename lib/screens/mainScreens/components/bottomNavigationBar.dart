@@ -18,23 +18,25 @@ class BottomNavigationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     color = index == initialIndex ? Colors.black : Colors.black38;
-    return GestureDetector(
+    return InkWell(
       onTap: index == initialIndex ? null : callBack,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: color,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            "$title",
-            style: TextStyle(color: color),
-          ),
-        ],
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: color,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "$title",
+              style: TextStyle(color: color),
+            ),
+          ],
+        ),
       ),
     );
   }

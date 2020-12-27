@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import './components/bottomNavigationBar.dart';
+import '../logScreens/registerScreens/registerScreen.dart';
 
 import './components/appBar.dart';
 import './components/clipper.dart';
+import './components/menuScreenActions.dart';
 
 class MenuScreen extends StatelessWidget {
   static final routeName = "MenuScreen";
@@ -25,13 +27,13 @@ class MenuScreen extends StatelessWidget {
                     color: Color.fromRGBO(81, 84, 89, 1),
                   ),
                 ),
-                _mainContent(),
+                MenuScreenActions(),
               ],
             ),
             SizedBox(
               height: 20,
             ),
-            _bottomContent(),
+            _bottomContent(context),
           ],
         ),
       ),
@@ -49,88 +51,24 @@ class MenuScreen extends StatelessWidget {
     );
   }
 
-  Widget _mainContent() {
-    return Column(
-      children: [
-        Card(
-          elevation: 5,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-            ],
-          ),
+  Widget _bottomContent(ctx) {
+    return GestureDetector(
+      onTap: () =>
+          Navigator.of(ctx).pushReplacementNamed(RegisterScreen.routeName),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Row(
+          children: [
+            Icon(
+              Icons.exit_to_app,
+              size: 40,
+            ),
+            Text(
+              "Log out",
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
         ),
-        SizedBox(
-          height: 30,
-        ),
-        Card(
-          elevation: 5,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                dense: true,
-                leading: Icon(Icons.ac_unit),
-                title: Text("Something"),
-                trailing: Icon(Icons.add),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _bottomContent() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Row(
-        children: [
-          Icon(
-            Icons.exit_to_app,
-            size: 40,
-          ),
-          Text(
-            "Log out",
-            style: TextStyle(fontSize: 30),
-          ),
-        ],
       ),
     );
   }

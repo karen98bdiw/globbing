@@ -4,10 +4,21 @@ import './screens/logScreens/introducingScreen.dart';
 import './screens/logScreens/logInScreen.dart';
 import './screens/logScreens/registerScreens/registerScreen.dart';
 import './screens/mainScreens/mainScreensRoot.dart';
-import './utils/languageState.dart';
-import './screens/mainScreens/menuScreen.dart';
+import 'providers/languageState.dart';
 
-main() => runApp(GlobbingApp());
+import './screens/mainScreens/menuScreen.dart';
+import './providers/userStateProvider.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp()
+      .then((value) => print("initialize OK!"))
+      .catchError((e) {
+    print(e);
+  });
+  runApp(GlobbingApp());
+}
 
 class GlobbingApp extends StatelessWidget {
   @override
@@ -16,6 +27,9 @@ class GlobbingApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LanguageItems(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserStateProvider(),
         ),
       ],
       child: MaterialApp(

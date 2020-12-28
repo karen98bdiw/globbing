@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "909530605278",
+    "project_id": "globbing-9023f",
+    "storage_bucket": "globbing-9023f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909530605278:android:6e3b894ee4fbe05efcc44f",
+        "android_client_info": {
+          "package_name": "com.example.globbing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909530605278-obtrfuu07lrb9pb1ivv24r34e1e0fbt4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw0HEnspwhjmeuZVQdlCHR1cxx5g-jBGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909530605278-obtrfuu07lrb9pb1ivv24r34e1e0fbt4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

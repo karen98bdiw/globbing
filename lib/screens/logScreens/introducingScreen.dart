@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/languageState.dart';
+import '../../providers/languageState.dart';
 import 'package:provider/provider.dart';
 
 import 'registerScreens/registerScreen.dart';

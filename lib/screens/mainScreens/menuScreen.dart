@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globbing/screens/logScreens/introducingScreen.dart';
 import './components/bottomNavigationBar.dart';
 import '../logScreens/registerScreens/registerScreen.dart';
 
@@ -54,7 +55,7 @@ class MenuScreen extends StatelessWidget {
   Widget _bottomContent(ctx) {
     return GestureDetector(
       onTap: () =>
-          Navigator.of(ctx).pushReplacementNamed(RegisterScreen.routeName),
+          Navigator.of(ctx).pushReplacementNamed(IntroducingScreen.routeName),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Row(

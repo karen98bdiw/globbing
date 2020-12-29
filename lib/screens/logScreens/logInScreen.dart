@@ -31,10 +31,12 @@ class _LogInScreenState extends State<LogInScreen> {
       });
 
       try {
-        var user = await userStateProvider.logIn(_email, _password);
+        await userStateProvider.logIn(_email, _password);
+
         setState(() {
           _isLoading = false;
         });
+        Navigator.of(context).pushNamed(MainScreensRoot.routeName);
         print("alllll waaassss okkkkkk");
       } catch (e) {
         setState(() {
@@ -43,6 +45,10 @@ class _LogInScreenState extends State<LogInScreen> {
         print("errrrooooooorrrr");
       }
     }
+  }
+
+  void gLogin() {
+    Navigator.of(context).pushNamed(MainScreensRoot.routeName);
   }
 
   @override
@@ -127,7 +133,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             children: [
                               Expanded(
                                 child: FbButton(
-                                  callBack: () => _logIn(),
+                                  callBack: () => gLogin(),
                                 ),
                               ),
                               SizedBox(
@@ -135,7 +141,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               ),
                               Expanded(
                                   child: GoogleButton(
-                                callBack: () => _logIn(),
+                                callBack: () => gLogin(),
                               )),
                             ],
                           )
@@ -165,6 +171,7 @@ class _LogInScreenState extends State<LogInScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
+              initialValue: "test@gmail.com",
               validator: (value) => value.isEmpty ? "Please write email" : null,
               onSaved: (newValue) => _email = newValue,
               decoration: InputDecoration(
@@ -182,6 +189,7 @@ class _LogInScreenState extends State<LogInScreen> {
               height: 10,
             ),
             TextFormField(
+              initialValue: "testtest",
               validator: (value) =>
                   value.isEmpty ? "please write password" : null,
               onSaved: (newValue) => _password = newValue,

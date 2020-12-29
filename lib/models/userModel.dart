@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class User {
+class UserModel {
   String id;
   String name;
   String surname;
   String mail;
   String password;
 
-  User({
+  UserModel({
     @required this.name,
     @required this.surname,
     @required this.mail,

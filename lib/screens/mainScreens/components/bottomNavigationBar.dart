@@ -68,8 +68,8 @@ class BottomNavigation extends StatelessWidget {
               title: "Main",
               initialIndex: curentIndex,
               index: 1,
-              callBack: () =>
-                  Navigator.of(context).pushNamed(MainScreensRoot.routeName),
+              callBack: () => Navigator.of(context)
+                  .pushReplacementNamed(MainScreensRoot.routeName),
             ),
             Text(
               "Enter Order",
@@ -82,8 +82,8 @@ class BottomNavigation extends StatelessWidget {
               title: "Menu",
               initialIndex: curentIndex,
               index: 2,
-              callBack: () =>
-                  Navigator.of(context).pushNamed(MenuScreen.routeName),
+              callBack: () => Navigator.of(context)
+                  .pushReplacementNamed(MenuScreen.routeName),
             ),
           ],
         ),

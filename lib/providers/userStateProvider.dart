@@ -1,27 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../models/userModel.dart' as MyUser;
+import '../models/userModel.dart';
 
 class UserStateProvider extends ChangeNotifier {
-  MyUser.User curentUser;
+  UserModel curentUser;
 
   Future<UserCredential> logIn(String email, String password) {
-    try {
-      return FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
-      print(e);
-    }
-
-    return null;
+    return FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
   }
 
-  Future<void> singUp(String email, String password) async {
-    try {
-      var user = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
-      print(e);
-    }
+  Future<UserCredential> singUp(String email, String password) async {
+    return FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+  }
+
+  Future<void> writeUserData(
+      String name, String surname, String phone, String uid) {
+    return FirebaseFirestore.instance.collection("users").doc(uid).set(
+      {
+        'name': name,
+        'surname': surname,
+        'phone': phone,
+      },
+    );
   }
 }

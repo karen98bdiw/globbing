@@ -38,7 +38,7 @@ class MenuScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: BottomNavigation.floatingButton(),
+      floatingActionButton: BottomNavigation.floatingButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigation(curentIndex: 2),
     );

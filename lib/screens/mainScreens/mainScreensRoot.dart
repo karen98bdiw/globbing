@@ -61,7 +61,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
       bottomNavigationBar: BottomNavigation(
         curentIndex: 1,
       ),
-      floatingActionButton: BottomNavigation.floatingButton(),
+      floatingActionButton: BottomNavigation.floatingButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

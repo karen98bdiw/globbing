@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../mainScreensRoot.dart';
 import '../menuScreen.dart';
 
+import '../addOrderScreen.dart';
+
 class BottomNavigationItem extends StatelessWidget {
   final int index;
   final String title;
@@ -91,9 +93,11 @@ class BottomNavigation extends StatelessWidget {
     );
   }
 
-  static Widget floatingButton() {
+  static Widget floatingButton(context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed(AddOrderScreen.routeName);
+      },
       backgroundColor: Colors.deepOrange,
       child: Icon(
         Icons.add,

@@ -5,6 +5,7 @@ import './screens/logScreens/logInScreen.dart';
 import './screens/logScreens/registerScreens/registerScreen.dart';
 import './screens/mainScreens/mainScreensRoot.dart';
 import './screens/logScreens/registerScreens/registerStep2.dart';
+import './screens/mainScreens/addOrderScreen.dart';
 import 'providers/languageState.dart';
 
 import './screens/mainScreens/menuScreen.dart';
@@ -42,6 +43,7 @@ class GlobbingApp extends StatelessWidget {
           MainScreensRoot.routeName: (ctx) => MainScreensRoot(),
           MenuScreen.routeName: (ctx) => MenuScreen(),
           RegisterStep2.routeName: (ctx) => RegisterStep2(),
+          AddOrderScreen.routeName: (ctx) => AddOrderScreen(),
         },
       ),
     );

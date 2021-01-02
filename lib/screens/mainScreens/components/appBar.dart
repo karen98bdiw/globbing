@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import './bottomSheet.dart';
+import '../changePersonalDataScreen.dart';
+import '../notificationsScreen.dart';
 
 class MyAppBar extends StatelessWidget {
   @override
@@ -15,32 +18,59 @@ class MyAppBar extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/thanos.jpeg"),
-                  backgroundColor: Colors.green,
-                  radius: 25,
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (_) {
+                        return ChangeAccountBottomSheet();
+                      },
+                    );
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage("assets/images/thanos.jpeg"),
+                        backgroundColor: Colors.green,
+                        radius: 25,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "name surname",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  "name surname",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 25,
-                  color: Colors.white,
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(ChangePersonalDataScreen.routeName);
+                  },
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 25,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
-            Icon(
-              Icons.notifications,
-              size: 25,
-              color: Colors.white,
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(NotificationsScreen.routeName);
+              },
+              child: Icon(
+                Icons.notifications,
+                size: 25,
+                color: Colors.white,
+              ),
             ),
           ],
         ),

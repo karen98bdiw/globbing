@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import './screens/logScreens/introducingScreen.dart';
 import './screens/logScreens/logInScreen.dart';
 import './screens/logScreens/registerScreens/registerScreen.dart';
 import './screens/mainScreens/mainScreensRoot.dart';
 import './screens/logScreens/registerScreens/registerStep2.dart';
 import './screens/mainScreens/addOrderScreen.dart';
+import './screens/mainScreens/changePersonalDataScreen.dart';
+import './screens/mainScreens/menuScreen.dart';
+import './screens/mainScreens/notificationsScreen.dart';
+
 import 'providers/languageState.dart';
 
-import './screens/mainScreens/menuScreen.dart';
 import './providers/userStateProvider.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +48,9 @@ class GlobbingApp extends StatelessWidget {
           MenuScreen.routeName: (ctx) => MenuScreen(),
           RegisterStep2.routeName: (ctx) => RegisterStep2(),
           AddOrderScreen.routeName: (ctx) => AddOrderScreen(),
+          ChangePersonalDataScreen.routeName: (ctx) =>
+              ChangePersonalDataScreen(),
+          NotificationsScreen.routeName: (ctx) => NotificationsScreen(),
         },
       ),
     );

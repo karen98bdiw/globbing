@@ -17,6 +17,8 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   String _name;
   double amount;
 
+  var curency = "AMD";
+
   var _formState = GlobalKey<FormState>();
 
   void _back() {
@@ -30,7 +32,9 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: _body(),
+      body: SingleChildScrollView(
+        child: _body(),
+      ),
     );
   }
 
@@ -221,21 +225,94 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                TextFormField(
-                  validator: (value) =>
-                      value.isEmpty ? "Please write total amount" : null,
-                  onSaved: (newValue) => _trackingNumber = newValue,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 5),
-                    hintText: "Total amount",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 1,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        validator: (value) =>
+                            value.isEmpty ? "Please write total amount" : null,
+                        onSaved: (newValue) => _trackingNumber = newValue,
+                        decoration: InputDecoration(
+                          suffixIconConstraints: BoxConstraints(maxWidth: 70),
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => _getCurencyDiolog(),
+                              ).then((value) {
+                                setState(() {
+                                  curency = value;
+                                });
+                              });
+                            },
+                            child: IntrinsicHeight(
+                              child: Row(
+                                children: [
+                                  VerticalDivider(
+                                    color: Colors.grey,
+                                    thickness: 2,
+                                  ),
+                                  Text(
+                                    "\$",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 30,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          contentPadding: EdgeInsets.only(left: 5),
+                          hintText: "Total amount",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Amount in $curency",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "0",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: " $curency",
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
@@ -245,10 +322,38 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
     );
   }
 
+  AlertDialog _getCurencyDiolog() {
+    return AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop("AMD");
+            },
+            child: Text("AMD"),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop("USD");
+            },
+            child: Text("USD"),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop("RUB");
+            },
+            child: Text("RUB"),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _countinueBtn() {
     return FlatButton(
       onPressed: () {
-        Navigator.of(context).pushNamed(MainScreensRoot.routeName);
+        Navigator.of(context).pushReplacementNamed(MainScreensRoot.routeName);
       },
       child: Text(
         "Continue",
@@ -262,19 +367,21 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   }
 
   Widget _deliverMethodsView() {
-    return Container(
-      height: 55,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) {
-          return _deliveryMethodViewItem(
-            countries[checkedCountriIndex].deliveryMethonds[index],
-            index,
+    return countries[checkedCountriIndex].deliveryMethonds.length == 0
+        ? Container()
+        : Container(
+            height: 55,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (ctx, index) {
+                return _deliveryMethodViewItem(
+                  countries[checkedCountriIndex].deliveryMethonds[index],
+                  index,
+                );
+              },
+              itemCount: countries[checkedCountriIndex].deliveryMethonds.length,
+            ),
           );
-        },
-        itemCount: countries[checkedCountriIndex].deliveryMethonds.length,
-      ),
-    );
   }
 
   Widget _deliveryMethodViewItem(DeliveryMethod m, index) {
@@ -330,5 +437,10 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

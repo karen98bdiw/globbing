@@ -42,7 +42,7 @@ class IntroducingScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundColor: Colors.grey,
-                        radius: 90,
+                        radius: MediaQuery.of(context).size.width * 0.3,
                         backgroundImage:
                             AssetImage("assets/images/thanos.jpeg"),
                       ),

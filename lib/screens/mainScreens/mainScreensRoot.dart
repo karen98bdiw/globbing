@@ -118,7 +118,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           MainScreenAction(
             title: "My Orders",
             subtitle: "No orders yet",
-            icon: Icons.card_giftcard,
+            asset: "assets/icons/order.png",
             callBack: () => print("My orders"),
           ),
           SizedBox(
@@ -127,7 +127,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           MainScreenAction(
             title: "My Adresses",
             subtitle: "Adresses in 7 countries",
-            icon: Icons.location_on,
+            asset: "assets/icons/location.png",
             callBack: () => print("My Adresses"),
           ),
         ],
@@ -146,9 +146,9 @@ class _MainScreensRootState extends State<MainScreensRoot> {
           children: [
             Column(
               children: [
-                Icon(
-                  Icons.home,
-                  size: 30,
+                Image.asset(
+                  "assets/icons/shopIcon.png",
+                  height: 30,
                   color: Colors.blue[200],
                 ),
                 SizedBox(
@@ -172,9 +172,9 @@ class _MainScreensRootState extends State<MainScreensRoot> {
             ),
             Column(
               children: [
-                Icon(
-                  Icons.shopping_cart,
-                  size: 30,
+                Image.asset(
+                  "assets/icons/shopping-cart.png",
+                  height: 30,
                   color: Colors.blue[200],
                 ),
                 SizedBox(

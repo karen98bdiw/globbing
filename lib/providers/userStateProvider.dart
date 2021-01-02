@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 import '../models/userModel.dart';
 
 class UserStateProvider extends ChangeNotifier {
-  UserModel curentUser;
+  UserModel curentUser = UserModel(
+    name: "Thanos",
+    surname: "Dion",
+    mail: "test@gmail.com",
+    password: "testtest",
+  );
+
+  //TODO:conect firebase to the curent user state;
 
   Future<UserCredential> logIn(String email, String password) {
     return FirebaseAuth.instance
@@ -25,5 +32,10 @@ class UserStateProvider extends ChangeNotifier {
         'phone': phone,
       },
     );
+  }
+
+  void updateUser(UserModel userModel) {
+    curentUser = userModel;
+    //TODO:create user map and write in firebase;
   }
 }

@@ -4,7 +4,7 @@ class DeliveryCountries {
   static final List<DeliveryCountryModel> countries = [
     DeliveryCountryModel(
       name: "USA",
-      iconAssets: "assets/images/united-kingdom.png",
+      iconAssets: "assets/images/usa.png",
       deliveryMethonds: [
         DeliveryMethod(
           type: DelivieryType.Express,
@@ -23,7 +23,7 @@ class DeliveryCountries {
     ),
     DeliveryCountryModel(
       name: "China",
-      iconAssets: "assets/images/russia.png",
+      iconAssets: "assets/images/china.png",
       deliveryMethonds: [
         DeliveryMethod(
           type: DelivieryType.Express,
@@ -41,17 +41,17 @@ class DeliveryCountries {
     ),
     DeliveryCountryModel(
       name: "Germany",
-      iconAssets: "assets/images/armenia.png",
+      iconAssets: "assets/images/germany.png",
       deliveryMethonds: [],
     ),
     DeliveryCountryModel(
       name: "Italy",
-      iconAssets: "assets/images/united-kingdom.png",
+      iconAssets: "assets/images/italy.png",
       deliveryMethonds: [],
     ),
     DeliveryCountryModel(
       name: "Dubai",
-      iconAssets: "assets/images/united-kingdom.png",
+      iconAssets: "assets/images/uae.png",
       deliveryMethonds: [
         DeliveryMethod(
           type: DelivieryType.Express,
@@ -64,7 +64,7 @@ class DeliveryCountries {
       ],
     ),
     DeliveryCountryModel(
-      name: "Russian",
+      name: "Russia",
       iconAssets: "assets/images/russia.png",
       deliveryMethonds: [
         DeliveryMethod(

@@ -33,10 +33,10 @@ class _LogInScreenState extends State<LogInScreen> {
       try {
         await userStateProvider.logIn(_email, _password);
 
-        setState(() {
-          _isLoading = false;
-        });
-        Navigator.of(context).pushNamed(MainScreensRoot.routeName);
+        // setState(() {
+        //   _isLoading = false;
+        // });
+        Navigator.of(context).pushReplacementNamed(MainScreensRoot.routeName);
         print("alllll waaassss okkkkkk");
       } catch (e) {
         setState(() {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './myOrdersScreen.dart';
+
 import './components/clipper.dart';
 import './components/appBar.dart';
 import './components/counters.dart';
@@ -51,7 +53,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 40,
               ),
               _bottomContent(),
             ],
@@ -119,7 +121,9 @@ class _MainScreensRootState extends State<MainScreensRoot> {
             title: "My Orders",
             subtitle: "No orders yet",
             asset: "assets/icons/order.png",
-            callBack: () => print("My orders"),
+            callBack: () {
+              Navigator.of(context).pushNamed(MyOrdersScreen.routeName);
+            },
           ),
           SizedBox(
             height: 20,

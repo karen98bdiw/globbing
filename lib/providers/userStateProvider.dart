@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/userModel.dart';
 
 class UserStateProvider extends ChangeNotifier {
-  UserModel curentUser = UserModel(
+  static UserModel curentUser = UserModel(
     name: "Thanos",
     surname: "Dion",
     mail: "test@gmail.com",

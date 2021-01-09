@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './myOrdersScreen.dart';
+import './myAdressesScreen.dart';
 
 import './components/clipper.dart';
 import './components/appBar.dart';
@@ -132,7 +133,9 @@ class _MainScreensRootState extends State<MainScreensRoot> {
             title: "My Adresses",
             subtitle: "Adresses in 7 countries",
             asset: "assets/icons/location.png",
-            callBack: () => print("My Adresses"),
+            callBack: () {
+              Navigator.of(context).pushNamed(MyAdressesScreen.routeName);
+            },
           ),
         ],
       ),

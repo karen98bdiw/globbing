@@ -12,6 +12,7 @@ import './screens/mainScreens/changePersonalDataScreen.dart';
 import './screens/mainScreens/menuScreen.dart';
 import './screens/mainScreens/notificationsScreen.dart';
 import './screens/mainScreens/myOrdersScreen.dart';
+import './screens/mainScreens/myAdressesScreen.dart';
 
 import 'providers/languageState.dart';
 
@@ -53,6 +54,7 @@ class GlobbingApp extends StatelessWidget {
               ChangePersonalDataScreen(),
           NotificationsScreen.routeName: (ctx) => NotificationsScreen(),
           MyOrdersScreen.routeName: (ctx) => MyOrdersScreen(),
+          MyAdressesScreen.routeName: (ctx) => MyAdressesScreen(),
         },
       ),
     );

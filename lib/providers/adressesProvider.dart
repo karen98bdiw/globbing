@@ -16,4 +16,8 @@ class AdressesProvider {
       phone: "+13024148597",
     )
   ];
+
+  Adress getAdressForCountry() {
+    //TODO:will got country and return adress for gived country;
+  }
 }

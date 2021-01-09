@@ -4,6 +4,7 @@ import 'package:globbing/models/deliverCountryModel.dart';
 import '../../providers/deliveriCountriesProvider.dart';
 
 import './components/poorAppBar.dart';
+import './adressDescriptionScreen.dart';
 
 class MyAdressesScreen extends StatelessWidget {
   static final routeName = "MyAdressesScreen";
@@ -19,7 +20,8 @@ class MyAdressesScreen extends StatelessWidget {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             return _adressViewItem(
-              DeliveryCountries.countries[index],
+              country: DeliveryCountries.countries[index],
+              context: context,
             );
           },
           itemCount: DeliveryCountries.countries.length,
@@ -28,19 +30,23 @@ class MyAdressesScreen extends StatelessWidget {
     );
   }
 
-  Widget _adressViewItem(DeliveryCountryModel d) {
+  Widget _adressViewItem({DeliveryCountryModel country, context}) {
     return Card(
       margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
       elevation: 5,
       color: Colors.white,
       child: ListTile(
+        onTap: () {
+          Navigator.of(context).pushNamed(AdressDescriptionScreen.routeName,
+              arguments: {'country': country});
+        },
         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         leading: CircleAvatar(
           backgroundColor: Colors.grey,
           radius: 20,
-          backgroundImage: AssetImage(d.iconAssets),
+          backgroundImage: AssetImage(country.iconAssets),
         ),
-        title: Text(d.name),
+        title: Text(country.name),
       ),
     );
   }

@@ -13,6 +13,7 @@ import './screens/mainScreens/menuScreen.dart';
 import './screens/mainScreens/notificationsScreen.dart';
 import './screens/mainScreens/myOrdersScreen.dart';
 import './screens/mainScreens/myAdressesScreen.dart';
+import './screens/mainScreens/adressDescriptionScreen.dart';
 
 import 'providers/languageState.dart';
 
@@ -55,6 +56,7 @@ class GlobbingApp extends StatelessWidget {
           NotificationsScreen.routeName: (ctx) => NotificationsScreen(),
           MyOrdersScreen.routeName: (ctx) => MyOrdersScreen(),
           MyAdressesScreen.routeName: (ctx) => MyAdressesScreen(),
+          AdressDescriptionScreen.routeName: (ctx) => AdressDescriptionScreen(),
         },
       ),
     );

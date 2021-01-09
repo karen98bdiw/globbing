@@ -8,6 +8,7 @@ class PoorAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
       backgroundColor: Color.fromRGBO(81, 84, 89, 1),
       title: Text(
         "$title",

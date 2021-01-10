@@ -20,4 +20,16 @@ class Adress {
     this.postalCode,
     this.state,
   });
+
+  Map<String, String> get adressInfo {
+    return {
+      'Address': this.adress,
+      'Address2': this.adress2,
+      'State': this.state,
+      'City': this.city,
+      'Postal Code': this.postalCode,
+      'Country': this.country.name,
+      'Phone': this.phone
+    };
+  }
 }

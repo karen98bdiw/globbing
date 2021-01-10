@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './bottomSheet.dart';
 import '../changePersonalDataScreen.dart';
 import '../notificationsScreen.dart';
+import '../../../providers/userStateProvider.dart';
 
 class MyAppBar extends StatelessWidget {
   @override
@@ -40,7 +41,7 @@ class MyAppBar extends StatelessWidget {
                         width: 15,
                       ),
                       Text(
-                        "name surname",
+                        "${UserStateProvider.curentUser.name} ${UserStateProvider.curentUser.surname}",
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       SizedBox(

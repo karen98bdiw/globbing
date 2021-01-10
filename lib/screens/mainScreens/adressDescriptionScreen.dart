@@ -1,4 +1,6 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import '../../providers/userStateProvider.dart';
 import '../../models/deliverCountryModel.dart';
 import './components/poorAppBar.dart';
 import '../../providers/adressesProvider.dart';
@@ -16,21 +18,39 @@ class _AdressDescriptionScreenState extends State<AdressDescriptionScreen> {
 
   var _checkedDeliveryTypeIndex = 0;
 
+  void _showCopyDialog(ctx) {
+    showDialog(
+      context: ctx,
+      builder: (ctx) {
+        return AlertDialog(
+          content: Container(
+            child: Text("Copied To Clipboard"),
+          ),
+        );
+      },
+    ).timeout(
+      Duration(seconds: 1),
+      onTimeout: () => Navigator.of(context).pop(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     country = (ModalRoute.of(context).settings.arguments as Map)['country'];
-
     return Scaffold(
       appBar: PoorAppBar(title: "Your adress in ${country.name}"),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _deliveryTypesView(),
-            SizedBox(
-              height: 20,
-            ),
-            _adressDescriptionView(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 50),
+          child: Column(
+            children: [
+              _deliveryTypesView(),
+              SizedBox(
+                height: 20,
+              ),
+              _adressDescriptionView(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: _bottomBar(),
@@ -38,7 +58,74 @@ class _AdressDescriptionScreenState extends State<AdressDescriptionScreen> {
   }
 
   Widget _adressDescriptionView() {
-    return Card();
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Column(
+          children: [
+            _adressDescriptionItem(
+                descriptionsItemTitle: "Recepient",
+                descriptionItemText:
+                    "${UserStateProvider.curentUser.name} ${UserStateProvider.curentUser.surname}"),
+            Divider(),
+            ..._adressDescriptionFieldsList()
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _adressDescriptionFieldsList() {
+    List<Widget> fieldViewList = [];
+    AdressesProvider.adresses[0].adressInfo.forEach((key, value) {
+      fieldViewList.add(_adressDescriptionItem(
+        descriptionsItemTitle: key.toString(),
+        descriptionItemText: value,
+      ));
+    });
+    return fieldViewList;
+  }
+
+  Widget _adressDescriptionItem(
+      {String descriptionsItemTitle, String descriptionItemText}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "$descriptionsItemTitle",
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 12,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text("$descriptionItemText"),
+          ],
+        ),
+        _copyButton(copyText: descriptionItemText),
+      ],
+    );
+  }
+
+  Widget _copyButton({copyText}) {
+    return OutlineButton(
+      onPressed: () {
+        FlutterClipboard.copy(copyText);
+        _showCopyDialog(context);
+      },
+      child: Text("copy"),
+      textColor: Colors.green,
+      borderSide: BorderSide(color: Colors.green),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(2),
+      ),
+    );
   }
 
   Widget _deliveryTypesView() {
